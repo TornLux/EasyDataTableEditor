@@ -3,6 +3,7 @@
 #include "EasyDataTableEditorModule.h"
 
 #include "ContentBrowserMenuContexts.h"
+#include "EasyCompositeDataTableEditor.h"
 #include "EasyDataTableEditor.h"
 #include "Engine/CompositeDataTable.h"
 
@@ -25,7 +26,7 @@ TSharedRef<IEasyDataTableEditor>  FEasyDataTableEditorModule::CreateDataTableEdi
 {
 	if (Cast<UCompositeDataTable>(Table) != nullptr)
 	{
-		//return CreateCompositeDataTableEditor(Mode, InitToolkitHost, Table);
+		return CreateCompositeDataTableEditor(Mode, InitToolkitHost, Table);
 	}
 
 	return CreateStandardDataTableEditor(Mode, InitToolkitHost, Table);
@@ -33,15 +34,16 @@ TSharedRef<IEasyDataTableEditor>  FEasyDataTableEditorModule::CreateDataTableEdi
 
 void FEasyDataTableEditorModule::BuildAssetMenu()
 {
+	//UDataTable
 	UToolMenu* Menu = UE::ContentBrowser::ExtendToolMenu_AssetContextMenu(UDataTable::StaticClass());
 	FToolMenuSection& Section = Menu->FindOrAddSection("GetAssetActions");
 	Section.AddDynamicEntry(NAME_None, FNewToolMenuSectionDelegate::CreateLambda([](FToolMenuSection& InSection)
 	{
 		InSection.AddMenuEntry(
 			"OpenEasyDataTableEditor",
-			LOCTEXT("EditorModule", "OpenEasyDataTableEditor"),
-			LOCTEXT("EditorModule", "Open EasyDataTableEditor to edit asset."),
-			FSlateIcon(FAppStyle::GetAppStyleSetName(), "Persona.AssetActions.CreateAnimAsset"),
+			LOCTEXT("EditorModule", "Open with EasyDataTableEditor"),
+			LOCTEXT("EditorModule", "Open with EasyDataTableEditor to edit asset."),
+			FSlateIcon(FAppStyle::GetAppStyleSetName(), "Icons.Edit"),
 			FToolMenuExecuteAction::CreateLambda([](const FToolMenuContext& InContext)
 			{
 				const UContentBrowserAssetContextMenuContext* Context = InContext.FindContext<UContentBrowserAssetContextMenuContext>();
@@ -67,13 +69,15 @@ TSharedRef<IEasyDataTableEditor>  FEasyDataTableEditorModule::CreateStandardData
 	NewDataTableEditor->InitDataTableEditor( Mode, InitToolkitHost, Table );
 	return NewDataTableEditor;
 }
-/*
+
 TSharedRef<IEasyDataTableEditor> FEasyDataTableEditorModule::CreateCompositeDataTableEditor(const EToolkitMode::Type Mode,
 	const TSharedPtr<class IToolkitHost>& InitToolkitHost, UDataTable* Table)
 {
-	return nullptr;
+	TSharedRef< FEasyCompositeDataTableEditor > NewDataTableEditor(new FEasyCompositeDataTableEditor());
+	NewDataTableEditor->InitDataTableEditor(Mode, InitToolkitHost, Table);
+	return NewDataTableEditor;
 }
-*/
+
 #undef LOCTEXT_NAMESPACE
 	
 IMPLEMENT_MODULE(FEasyDataTableEditorModule, EasyDataTableEditor)

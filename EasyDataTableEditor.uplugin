@@ -1,18 +1,18 @@
-{
+﻿{
 	"FileVersion": 3,
 	"Version": 1,
 	"VersionName": "1.0",
 	"FriendlyName": "EasyDataTableEditor",
-	"Description": "MultiLineDataTableEditor",
+	"Description": "MultiLine-DataTableEditor",
 	"Category": "Other",
 	"CreatedBy": "TornLux",
-	"CreatedByURL": "",
-	"DocsURL": "",
+	"CreatedByURL": "https://github.com/TornLux/EasyDataTableEditor",
+	"DocsURL": "https://github.com/TornLux/EasyDataTableEditor",
 	"MarketplaceURL": "",
-	"SupportURL": "",
-	"EngineVersion": "5.4.0",
 	"CanContainContent": true,
-	"Installed": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
 	"Modules": [
 		{
 			"Name": "EasyDataTableEditor",

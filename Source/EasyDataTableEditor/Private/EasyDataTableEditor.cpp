@@ -1444,7 +1444,7 @@ void FEasyDataTableEditor::SetHighlightedRow(FName Name)
 		{
 			//修改后的高光
 			//CellsListView->SetItemSelection(*NewSelectionPtr,true);//->SetSelection(*NewSelectionPtr);
-			CellsListView->SetItemHighlighted(*NewSelectionPtr,true);
+			//CellsListView->SetItemHighlighted(*NewSelectionPtr,true);
 			CellsListView->RequestScrollIntoView(*NewSelectionPtr);
 		}
 		else
